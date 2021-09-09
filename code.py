@@ -12,6 +12,7 @@ import os
 import time
 import displayio
 import terminalio
+import time
 from adafruit_display_shapes.rect import Rect
 from adafruit_display_text import label
 from adafruit_macropad import MacroPad
@@ -53,6 +54,9 @@ class App:
 macropad = MacroPad()
 macropad.display.auto_refresh = False
 macropad.pixels.auto_write = False
+
+#tones for page select
+tones = [196,262,349,494,587]
 
 # Set up displayio group with all the labels
 group = displayio.Group()
@@ -104,7 +108,9 @@ while True:
         app_index = position % len(apps)
         apps[app_index].switch()
         last_position = position
-
+        macropad.start_tone(tones[app_index])
+        time.sleep(0.5)
+        macropad.stop_tone()
     # Handle encoder button. If state has changed, and if there's a
     # corresponding macro, set up variables to act on this just like
     # the keypad keys, as if it were a 13th key/macro.
@@ -112,9 +118,9 @@ while True:
     encoder_switch = macropad.encoder_switch_debounced.pressed
     if encoder_switch != last_encoder_switch:
         last_encoder_switch = encoder_switch
-        if len(apps[app_index].macros) < 13:
-            continue    # No 13th macro, just resume main loop
-        key_number = 12 # else process below as 13th macro
+        if len(apps[app_index].macros) < 6:
+            continue    # No 6th macro, just resume main loop
+        key_number = 5 # else process below as 6th macro
         pressed = encoder_switch
     else:
         event = macropad.keys.events.get()
