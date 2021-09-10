@@ -57,6 +57,7 @@ macropad.pixels.auto_write = False
 
 #tones for page select
 tones = [196,262,349,494,587]
+audioFiles = ["Numpad.mp3", "Emojis.mp3", "Spanish.mp3", "Photoshop.mp3", "Edge.mp3"]
 
 # Set up displayio group with all the labels
 group = displayio.Group()
@@ -108,9 +109,7 @@ while True:
         app_index = position % len(apps)
         apps[app_index].switch()
         last_position = position
-        macropad.start_tone(tones[app_index])
-        time.sleep(0.5)
-        macropad.stop_tone()
+        macropad.play_file(audioFiles[app_index])
     # Handle encoder button. If state has changed, and if there's a
     # corresponding macro, set up variables to act on this just like
     # the keypad keys, as if it were a 13th key/macro.
