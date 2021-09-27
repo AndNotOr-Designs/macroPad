@@ -57,7 +57,7 @@ macropad.pixels.auto_write = False
 
 #tones for page select
 tones = [196,262,349,494,587]
-audioFiles = ["Numpad.mp3", "Emojis.mp3", "Spanish.mp3", "Photoshop.mp3", "Edge.mp3"]
+audioFiles = ["Emojis.mp3", "Spanish.mp3", "Numpad.mp3", "Photoshop.mp3", "Edge.mp3"]
 
 # Set up displayio group with all the labels
 group = displayio.Group()
